@@ -1,0 +1,28 @@
+const fastifyPlugin = require('fastify-plugin')
+
+const curlPlugin = async (fastify, opts, done) => {
+    fastify.register(require("fastify-curl"), {
+        config: {
+            httpclient: {
+                request: {
+                  timeout: 5000
+                },
+                httpAgent: {
+                  keepAlive: true,
+                  freeSocketKeepAliveTimeout: 4000,
+                  maxSockets: 9007199254740991,
+                  maxFreeSockets: 256
+                },
+                httpsAgent: {
+                  keepAlive: true,
+                  freeSocketKeepAliveTimeout: 4000,
+                  maxSockets: 9007199254740991,
+                  maxFreeSockets: 256
+                }
+            }
+        }
+    });
+    done()
+}
+
+module.exports = fastifyPlugin(curlPlugin)
