@@ -5,7 +5,7 @@ module.exports = routes = async (fastify, options) => {
 
     const collection = fastify.mongo.db.collection("api_data")    
 
-    fastify.get('/:url', async (request, reply) => {
+    fastify.post('/:url', async (request, reply) => {
         
         const url = request.url;                
         const option = {
